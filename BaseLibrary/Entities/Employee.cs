@@ -32,6 +32,7 @@ namespace BaseLibrary.Entities
         public static void testinggit()
         {
             Console.WriteLine("git testing");
+            Console.WriteLine("Git testing for the second time");
         }
     }
 }
