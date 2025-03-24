@@ -29,5 +29,10 @@ namespace BaseLibrary.Entities
         public int BranchId { get; set; }
         public Town? Town { get; set; }
         public int TownId { get; set; }
+        public static void testinggit()
+        {
+            Console.WriteLine("git testing");
+            Console.WriteLine("Git testing for the second time");
+        }
     }
 }
