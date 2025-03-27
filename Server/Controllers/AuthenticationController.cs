@@ -15,6 +15,7 @@ namespace Server.Controllers
             if(user == null)
             {
                 return BadRequest("Model Is Empty");
+                // tested for tracking branches
             }
             var result = await accountInteface.CreateAsync(user);
             return Ok(result);
