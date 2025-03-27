@@ -27,6 +27,7 @@ namespace Server.Controllers
             if (user == null) return BadRequest("Model is Empty");
             var result = await accountInteface.SignInAsync(user);
             return Ok(result);
+            // testing the merge conflict from tracking dev-branch
         }
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshTokenAsync(RefreshToken token)
