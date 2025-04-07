@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_PATH = 'C:\\inetpub\\EmployeeManagement'       // Update if your csproj is in subfolder
+        DEPLOY_PATH = 'C:\\inetpub\\Published\\EmpMangmnt'
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git url: 'https://github.com/TechXpert-in/EmployeeManagement.git', branch: 'main'
+            }
+        }
+
+       // stage('Restore') {
+       //     steps {
+       //         bat "dotnet restore %PROJECT_PATH%"
+      //      }
+      //  }
+
+        stage('Build') {
+            steps {
+                bat "dotnet build %PROJECT_PATH% --configuration Release"
+            }
+        }
+        stage('Stop IIS Site') {
+            steps {
+                echo "🛑 Stopping IIS Site..."
+                bat 'powershell.exe Stop-WebSite -Name "EmpMangmnt"'
+                bat 'ping -n 6 127.0.0.1 > nul'
+
+            }
+        }
+        stage('Kill Processes Holding DLLs') {
+            steps {
+                bat 'taskkill /F /IM w3wp.exe || echo No w3wp running'
+                bat 'taskkill /F /IM dotnet.exe || echo No dotnet running'
+            }
+        }
+         
+        stage('Publish') {
+            steps {
+                bat "dotnet publish %PROJECT_PATH% -c Release -o %DEPLOY_PATH%"
+            }
+        }
+
+        stage('Restart IIS') {
+            steps {
+                bat "iisreset"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Application published and deployed to IIS successfully!'
+        }
+        failure {
+            echo '❌ Deployment failed. Please check the logs.'
+        }
+    }
+}
