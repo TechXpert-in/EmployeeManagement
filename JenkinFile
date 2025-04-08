@@ -19,7 +19,7 @@ pipeline {
       //      }
       //  }
 
-      stages {
+      
         stage('Clean Deployment Folder') {
             steps {
                 bat '''
@@ -28,7 +28,7 @@ pipeline {
                 '''
             }
         }
-    }
+   
         stage('Build') {
             steps {
                 bat "dotnet clean"
