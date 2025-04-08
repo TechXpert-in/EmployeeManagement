@@ -9,7 +9,7 @@ namespace Server.Controllers
     [ApiController]
     public class AuthenticationController(IUserAccount accountInteface) : ControllerBase
     {
-        //changed from register to register-user
+        //changed from register to register-user-again
         [HttpPost("register-user")]
         public async Task<IActionResult> CreateAsync(Register user)
         {
