@@ -21,6 +21,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                bat "dotnet clean"
                 bat "dotnet build %PROJECT_PATH% --configuration Release"
             }
         }
