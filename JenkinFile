@@ -19,6 +19,16 @@ pipeline {
       //      }
       //  }
 
+      stages {
+        stage('Clean Deployment Folder') {
+            steps {
+                bat '''
+                rd /s /q "C:\\inetpub\\Published\\EmpMangmnt"
+                mkdir "C:\\inetpub\\Published\\EmpMangmnt"
+                '''
+            }
+        }
+    }
         stage('Build') {
             steps {
                 bat "dotnet clean"
