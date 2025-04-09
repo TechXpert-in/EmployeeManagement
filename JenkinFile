@@ -13,11 +13,11 @@ pipeline {
             }
         }
 
-       // stage('Restore') {
-       //     steps {
-       //         bat "dotnet restore %PROJECT_PATH%"
-      //      }
-      //  }
+        stage('Restore') {
+            steps {
+                bat "dotnet restore %PROJECT_PATH%"
+            }
+       }
 
       
         // stage('Clean Deployment Folder') {
