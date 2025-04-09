@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = 'C:\\inetpub\\EmployeeManagement'       // Update if your csproj is in subfolder
+        PROJECT_PATH = 'C:\\inetpub\\EmployeeManagement'       // Update if your csproj is in subfolders
         DEPLOY_PATH = 'C:\\inetpub\\Published\\EmpMangmnt'
     }
 
