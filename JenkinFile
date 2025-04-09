@@ -7,28 +7,24 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git url: 'https://github.com/TechXpert-in/EmployeeManagement.git', branch: 'main'
+         stage('Update Project') {
+                steps {
+                    script {
+                        def repoDir = 'C:\\inetpub\\EmployeeManagement'
+                        if (fileExists("${repoDir}\\.git")) {
+                            dir(repoDir) {
+                                bat 'git pull origin main'
+                            }
+                        } else {
+                            dir('C:\\inetpub') {
+                                bat 'git clone https://github.com/TechXpert-in/EmployeeManagement.git'
+                            }
+                        }
+                    }
+              }
             }
-        }
 
-        stage('Restore') {
-            steps {
-                bat "dotnet restore %PROJECT_PATH%"
-            }
-       }
-
-      
-        // stage('Clean Deployment Folder') {
-        //    steps {
-        //        bat '''
-        //        rd /s /q "C:\\inetpub\\Published\\EmpMangmnt"
-        //        mkdir "C:\\inetpub\\Published\\EmpMangmnt"
-        //        '''
-        //    }
-        // }
-   
+       
         stage('Build') {
             steps {
                 bat "dotnet clean"
