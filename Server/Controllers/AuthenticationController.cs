@@ -15,13 +15,13 @@ namespace Server.Controllers
             if(user == null)
             {
 
-                // added comment and space for testing
+                // hello done from prince
+                // lets add some more comments
                 return BadRequest("Model Is Empty");
-                return BadRequest("Model Is Empty");
-                return BadRequest("Model Is Empty");
-                return BadRequest("Model Is Empty");
+                
             }
             var result = await accountInteface.CreateAsync(user);
+            // added commit branch 
             return Ok(result);
         }
 
