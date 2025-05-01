@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // added comment to delete it from git
 // why program.cs is not appearing 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,6 +25,7 @@ builder.Services.AddScoped<IUserAccount, UserAccountRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// this commit will be deleted fromm the github account
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
