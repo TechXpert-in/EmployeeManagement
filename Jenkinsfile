@@ -2,25 +2,32 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_PATH = 'C:\\inetpub\\EmployeeManagement'       // Update if your csproj is in subfolder
+        PROJECT_PATH = 'C:\\inetpub\\EmployeeManagement'       // Update if your csproj is in subfolders
         DEPLOY_PATH = 'C:\\inetpub\\Published\\EmpMangmnt'
     }
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git url: 'https://github.com/TechXpert-in/EmployeeManagement.git', branch: 'main'
+         stage('Update Project') {
+                steps {
+                    script {
+                        def repoDir = 'C:\\inetpub\\EmployeeManagement'
+                        if (fileExists("${repoDir}\\.git")) {
+                            dir(repoDir) {
+                                bat 'git pull origin main'
+                            }
+                        } else {
+                            dir('C:\\inetpub') {
+                                bat 'git clone https://github.com/TechXpert-in/EmployeeManagement.git'
+                            }
+                        }
+                    }
+              }
             }
-        }
 
-       // stage('Restore') {
-       //     steps {
-       //         bat "dotnet restore %PROJECT_PATH%"
-      //      }
-      //  }
-
+       
         stage('Build') {
             steps {
+                bat "dotnet clean"
                 bat "dotnet build %PROJECT_PATH% --configuration Release"
             }
         }
@@ -28,7 +35,7 @@ pipeline {
             steps {
                 echo "🛑 Stopping IIS Site..."
                 bat 'powershell.exe Stop-WebSite -Name "EmpMangmnt"'
-                bat 'ping -n 6 127.0.0.1 > nul'
+                bat 'ping -n 10 127.0.0.1 > nul'
 
             }
         }
