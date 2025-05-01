@@ -7,7 +7,7 @@ using ServerLibrary.Repositories.Implementations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// added comment to delete it from git
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
