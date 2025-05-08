@@ -26,7 +26,10 @@ namespace Server.Controllers
             // added commit branch 
             return Ok(result);
         }
-        
+        public int subtract(int a, int b)
+        {
+            return a - b;
+        }
         [HttpPost("Newlogin")]
         public async Task<IActionResult> SignInAsync(Login user)
         {
