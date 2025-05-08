@@ -26,7 +26,18 @@ namespace Server.Controllers
             // added commit branch 
             return Ok(result);
         }
-        
+        public int sum(int a, int b)
+        {
+            return a + b;
+        }
+
+        public int fibonnaci(int n)
+        {
+            if (n <= 1)
+                return n;
+            return fibonnaci(n - 1) + fibonnaci(n - 2);
+        }
+
         [HttpPost("Newlogin")]
         public async Task<IActionResult> SignInAsync(Login user)
         {
